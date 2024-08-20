@@ -1,1 +1,0 @@
-# Rithika-Anand-045047-_SQL_Bottom-Up_Bank
