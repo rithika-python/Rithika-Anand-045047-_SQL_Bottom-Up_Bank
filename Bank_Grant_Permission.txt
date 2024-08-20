@@ -1,0 +1,51 @@
+--1. BranchManager
+--Responsibilities: Manages branch operations, oversees customer accounts, and authorizes transactions.
+
+-- Creating Id and Password for BranchManager
+CREATE USER 'BranchManager'@'localhost' IDENTIFIED BY 'manager123';
+
+-- Grant Permissions to BranchManager
+
+-- Full access to Customers and Accounts
+GRANT SELECT, INSERT, UPDATE, DELETE ON bank.Customers TO 'BranchManager'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON bank.Accounts TO 'BranchManager'@'localhost';
+
+-- Read-only access to Nominees and Service Requests
+GRANT SELECT ON bank.Nominees TO 'BranchManager'@'localhost';
+GRANT SELECT ON bank.ServiceRequests TO 'BranchManager'@'localhost';
+
+-- Read-only access to Documents
+GRANT SELECT ON bank.Documents TO 'BranchManager'@'localhost';
+
+--2. AccountOfficer
+--Responsibilities: Handles customer account opening, maintenance, and updates.
+
+-- Creating Id and Password for AccountOfficer
+CREATE USER 'AccountOfficer'@'localhost' IDENTIFIED BY 'officer123';
+
+-- Grant Permissions to AccountOfficer
+
+-- Full access to Customers and Accounts
+GRANT SELECT, INSERT, UPDATE ON bank.Customers TO 'AccountOfficer'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bank.Accounts TO 'AccountOfficer'@'localhost';
+
+-- Limited access to Nominees
+GRANT SELECT, INSERT ON bank.Nominees TO 'AccountOfficer'@'localhost';
+
+--3. CustomerServiceRepresentative
+--Responsibilities: Handles customer inquiries, service requests, and assists with account-related issues.
+
+-- Creating Id and Password for CustomerServiceRepresentative
+CREATE USER 'CustomerServiceRep'@'localhost' IDENTIFIED BY 'csr123';
+
+-- Grant Permissions to CustomerServiceRepresentative
+
+-- View access to Customers and Accounts
+GRANT SELECT ON bank.Customers TO 'CustomerServiceRep'@'localhost';
+GRANT SELECT ON bank.Accounts TO 'CustomerServiceRep'@'localhost';
+
+-- Manage Service Requests
+GRANT SELECT, INSERT, UPDATE ON bank.ServiceRequests TO 'CustomerServiceRep'@'localhost';
+
+-- View access to Documents
+GRANT SELECT ON bank.Documents TO 'CustomerServiceRep'@'localhost';
